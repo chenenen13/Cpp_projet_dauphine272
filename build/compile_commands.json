@@ -1,0 +1,50 @@
+[
+{
+  "directory": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/build",
+  "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/main.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/main.cpp\"",
+  "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/main.cpp",
+  "output": "CMakeFiles/trading_sim.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/build",
+  "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/MarketDataFeed.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/MarketDataFeed.cpp\"",
+  "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/MarketDataFeed.cpp",
+  "output": "CMakeFiles/trading_sim.dir/src/MarketDataFeed.cpp.o"
+},
+{
+  "directory": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/build",
+  "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/OrderBook.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/OrderBook.cpp\"",
+  "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/OrderBook.cpp",
+  "output": "CMakeFiles/trading_sim.dir/src/OrderBook.cpp.o"
+},
+{
+  "directory": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/build",
+  "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/MatchingEngine.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/MatchingEngine.cpp\"",
+  "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/MatchingEngine.cpp",
+  "output": "CMakeFiles/trading_sim.dir/src/MatchingEngine.cpp.o"
+},
+{
+  "directory": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/build",
+  "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/Strategy.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/Strategy.cpp\"",
+  "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/Strategy.cpp",
+  "output": "CMakeFiles/trading_sim.dir/src/Strategy.cpp.o"
+},
+{
+  "directory": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/build",
+  "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/StrategyEngine.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/StrategyEngine.cpp\"",
+  "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/StrategyEngine.cpp",
+  "output": "CMakeFiles/trading_sim.dir/src/StrategyEngine.cpp.o"
+},
+{
+  "directory": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/build",
+  "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/Portfolio.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/Portfolio.cpp\"",
+  "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/Portfolio.cpp",
+  "output": "CMakeFiles/trading_sim.dir/src/Portfolio.cpp.o"
+},
+{
+  "directory": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/build",
+  "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/Reporting.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/Reporting.cpp\"",
+  "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/Reporting.cpp",
+  "output": "CMakeFiles/trading_sim.dir/src/Reporting.cpp.o"
+}
+]
