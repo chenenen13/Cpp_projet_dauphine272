@@ -857,4 +857,6 @@ CMakeFiles/trading_sim.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_execution_policy.h \
   /Users/chenjieli/Desktop/Dauphine_272/c++\ appliqué\ en\ finance/projet/include/Portfolio.hpp \
   /Users/chenjieli/Desktop/Dauphine_272/c++\ appliqué\ en\ finance/projet/include/Reporting.hpp \
+  /Users/chenjieli/Desktop/Dauphine_272/c++\ appliqué\ en\ finance/projet/include/BacktestLogger.hpp \
+  /Users/chenjieli/Desktop/Dauphine_272/c++\ appliqué\ en\ finance/projet/include/CsvWriter.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream

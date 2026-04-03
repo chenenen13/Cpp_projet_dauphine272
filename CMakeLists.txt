@@ -15,6 +15,9 @@ add_executable(trading_sim
     src/StrategyEngine.cpp
     src/Portfolio.cpp
     src/Reporting.cpp
+    src/RiskMetrics.cpp
+    src/CsvWriter.cpp
+    src/BacktestLogger.cpp
 )
 
 target_include_directories(trading_sim PRIVATE include)

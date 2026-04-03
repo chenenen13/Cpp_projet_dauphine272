@@ -19,6 +19,7 @@ void Portfolio::on_trade(const Trade& trade) {
 
     const int qty = trade.quantity;
     const double px = trade.price;
+    double realized_before = realized_pnl_;
 
     if (trade.aggressor_side == Side::Bid) {
         cash_ -= px * qty;
@@ -57,6 +58,9 @@ void Portfolio::on_trade(const Trade& trade) {
             }
         }
     }
+
+    pnl_increments_.push_back(realized_pnl_ - realized_before);
+    
 }
 
 int Portfolio::position() const {
@@ -97,4 +101,16 @@ void Portfolio::add_risk_reject() {
 
 void Portfolio::add_liquidity_reject() {
     ++rejected_liquidity_count_;
+}
+
+double Portfolio::gross_exposure(double mark_price) const {
+    return std::abs(position_) * mark_price;
+}
+
+double Portfolio::net_exposure(double mark_price) const {
+    return position_ * mark_price;
+}
+
+const std::vector<double>& Portfolio::pnl_increments() const {
+    return pnl_increments_;
 }

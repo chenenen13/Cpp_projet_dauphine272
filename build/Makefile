@@ -129,6 +129,54 @@ trading_sim/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/trading_sim.dir/build.make CMakeFiles/trading_sim.dir/build
 .PHONY : trading_sim/fast
 
+src/BacktestLogger.o: src/BacktestLogger.cpp.o
+.PHONY : src/BacktestLogger.o
+
+# target to build an object file
+src/BacktestLogger.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trading_sim.dir/build.make CMakeFiles/trading_sim.dir/src/BacktestLogger.cpp.o
+.PHONY : src/BacktestLogger.cpp.o
+
+src/BacktestLogger.i: src/BacktestLogger.cpp.i
+.PHONY : src/BacktestLogger.i
+
+# target to preprocess a source file
+src/BacktestLogger.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trading_sim.dir/build.make CMakeFiles/trading_sim.dir/src/BacktestLogger.cpp.i
+.PHONY : src/BacktestLogger.cpp.i
+
+src/BacktestLogger.s: src/BacktestLogger.cpp.s
+.PHONY : src/BacktestLogger.s
+
+# target to generate assembly for a file
+src/BacktestLogger.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trading_sim.dir/build.make CMakeFiles/trading_sim.dir/src/BacktestLogger.cpp.s
+.PHONY : src/BacktestLogger.cpp.s
+
+src/CsvWriter.o: src/CsvWriter.cpp.o
+.PHONY : src/CsvWriter.o
+
+# target to build an object file
+src/CsvWriter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trading_sim.dir/build.make CMakeFiles/trading_sim.dir/src/CsvWriter.cpp.o
+.PHONY : src/CsvWriter.cpp.o
+
+src/CsvWriter.i: src/CsvWriter.cpp.i
+.PHONY : src/CsvWriter.i
+
+# target to preprocess a source file
+src/CsvWriter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trading_sim.dir/build.make CMakeFiles/trading_sim.dir/src/CsvWriter.cpp.i
+.PHONY : src/CsvWriter.cpp.i
+
+src/CsvWriter.s: src/CsvWriter.cpp.s
+.PHONY : src/CsvWriter.s
+
+# target to generate assembly for a file
+src/CsvWriter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trading_sim.dir/build.make CMakeFiles/trading_sim.dir/src/CsvWriter.cpp.s
+.PHONY : src/CsvWriter.cpp.s
+
 src/MarketDataFeed.o: src/MarketDataFeed.cpp.o
 .PHONY : src/MarketDataFeed.o
 
@@ -249,6 +297,30 @@ src/Reporting.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/trading_sim.dir/build.make CMakeFiles/trading_sim.dir/src/Reporting.cpp.s
 .PHONY : src/Reporting.cpp.s
 
+src/RiskMetrics.o: src/RiskMetrics.cpp.o
+.PHONY : src/RiskMetrics.o
+
+# target to build an object file
+src/RiskMetrics.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trading_sim.dir/build.make CMakeFiles/trading_sim.dir/src/RiskMetrics.cpp.o
+.PHONY : src/RiskMetrics.cpp.o
+
+src/RiskMetrics.i: src/RiskMetrics.cpp.i
+.PHONY : src/RiskMetrics.i
+
+# target to preprocess a source file
+src/RiskMetrics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trading_sim.dir/build.make CMakeFiles/trading_sim.dir/src/RiskMetrics.cpp.i
+.PHONY : src/RiskMetrics.cpp.i
+
+src/RiskMetrics.s: src/RiskMetrics.cpp.s
+.PHONY : src/RiskMetrics.s
+
+# target to generate assembly for a file
+src/RiskMetrics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/trading_sim.dir/build.make CMakeFiles/trading_sim.dir/src/RiskMetrics.cpp.s
+.PHONY : src/RiskMetrics.cpp.s
+
 src/Strategy.o: src/Strategy.cpp.o
 .PHONY : src/Strategy.o
 
@@ -330,6 +402,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... trading_sim"
+	@echo "... src/BacktestLogger.o"
+	@echo "... src/BacktestLogger.i"
+	@echo "... src/BacktestLogger.s"
+	@echo "... src/CsvWriter.o"
+	@echo "... src/CsvWriter.i"
+	@echo "... src/CsvWriter.s"
 	@echo "... src/MarketDataFeed.o"
 	@echo "... src/MarketDataFeed.i"
 	@echo "... src/MarketDataFeed.s"
@@ -345,6 +423,9 @@ help:
 	@echo "... src/Reporting.o"
 	@echo "... src/Reporting.i"
 	@echo "... src/Reporting.s"
+	@echo "... src/RiskMetrics.o"
+	@echo "... src/RiskMetrics.i"
+	@echo "... src/RiskMetrics.s"
 	@echo "... src/Strategy.o"
 	@echo "... src/Strategy.i"
 	@echo "... src/Strategy.s"

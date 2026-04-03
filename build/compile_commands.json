@@ -46,5 +46,23 @@
   "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/Reporting.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/Reporting.cpp\"",
   "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/Reporting.cpp",
   "output": "CMakeFiles/trading_sim.dir/src/Reporting.cpp.o"
+},
+{
+  "directory": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/build",
+  "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/RiskMetrics.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/RiskMetrics.cpp\"",
+  "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/RiskMetrics.cpp",
+  "output": "CMakeFiles/trading_sim.dir/src/RiskMetrics.cpp.o"
+},
+{
+  "directory": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/build",
+  "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/CsvWriter.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/CsvWriter.cpp\"",
+  "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/CsvWriter.cpp",
+  "output": "CMakeFiles/trading_sim.dir/src/CsvWriter.cpp.o"
+},
+{
+  "directory": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/build",
+  "command": "/usr/bin/c++  -I\"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/include\" -std=c++17 -arch arm64 -Wall -Wextra -Wpedantic -o CMakeFiles/trading_sim.dir/src/BacktestLogger.cpp.o -c \"/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/BacktestLogger.cpp\"",
+  "file": "/Users/chenjieli/Desktop/Dauphine_272/c++ appliqué en finance/projet/src/BacktestLogger.cpp",
+  "output": "CMakeFiles/trading_sim.dir/src/BacktestLogger.cpp.o"
 }
 ]
