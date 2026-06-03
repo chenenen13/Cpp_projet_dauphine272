@@ -39,17 +39,18 @@ inline std::string to_string(Signal signal) {
 }
 
 inline std::string trim(const std::string& s) {
-    auto begin = s.begin();
-    while (begin != s.end() && std::isspace(static_cast<unsigned char>(*begin))) {
-        ++begin;
+    auto begin = std::find_if_not(s.begin(), s.end(), [](unsigned char c) {
+        return std::isspace(c);
+    });
+
+    auto end = std::find_if_not(s.rbegin(), s.rend(), [](unsigned char c) {
+        return std::isspace(c);
+    }).base();
+
+    if (begin >= end) {
+        return {};
     }
-
-    auto end = s.end();
-    do {
-        --end;
-    } while (end >= begin && std::isspace(static_cast<unsigned char>(*end)));
-
-    return (begin <= end) ? std::string(begin, end + 1) : std::string{};
+    return std::string(begin, end);
 }
 
 inline Side parse_side(const std::string& raw) {

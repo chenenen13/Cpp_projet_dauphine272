@@ -26,7 +26,6 @@ void BacktestLogger::log_market_data(const MarketData& md) {
 }
 
 void BacktestLogger::log_trade(const Trade& tr, int position_after, double cash_after, double equity_after) {
-    market_writer_.is_open();
     trades_writer_.write_row({
         std::to_string(tr.trade_id),
         std::to_string(tr.timestamp),

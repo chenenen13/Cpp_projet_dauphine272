@@ -6,8 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_executable(trading_sim
-    src/main.cpp
+set(TRADING_CORE_SOURCES
     src/MarketDataFeed.cpp
     src/OrderBook.cpp
     src/MatchingEngine.cpp
@@ -20,11 +19,26 @@ add_executable(trading_sim
     src/BacktestLogger.cpp
 )
 
-target_include_directories(trading_sim PRIVATE include)
-target_compile_features(trading_sim PRIVATE cxx_std_17)
+function(enable_project_warnings target_name)
+    if (MSVC)
+        target_compile_options(${target_name} PRIVATE /W4)
+    else()
+        target_compile_options(${target_name} PRIVATE -Wall -Wextra -Wpedantic)
+    endif()
+endfunction()
 
-if (MSVC)
-    target_compile_options(trading_sim PRIVATE /W4)
-else()
-    target_compile_options(trading_sim PRIVATE -Wall -Wextra -Wpedantic)
-endif()
+add_library(trading_core ${TRADING_CORE_SOURCES})
+target_include_directories(trading_core PUBLIC include)
+target_compile_features(trading_core PUBLIC cxx_std_17)
+enable_project_warnings(trading_core)
+
+add_executable(trading_sim src/main.cpp)
+target_link_libraries(trading_sim PRIVATE trading_core)
+enable_project_warnings(trading_sim)
+
+enable_testing()
+
+add_executable(trading_tests tests/test_core.cpp)
+target_link_libraries(trading_tests PRIVATE trading_core)
+enable_project_warnings(trading_tests)
+add_test(NAME trading_tests COMMAND trading_tests)

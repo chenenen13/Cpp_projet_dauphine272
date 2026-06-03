@@ -152,6 +152,7 @@ int main(int argc, char* argv[]) {
         }
 
         order_book.display(5);
+        reporting.write_risk_report("output/risk_report.csv", portfolio, latest_mark);
         reporting.print_final_report(portfolio, latest_mark);
 
         std::cout << "\nCSV files written to ./output/\n";

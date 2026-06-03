@@ -2,16 +2,6 @@
 
 #include <vector>
 
-struct PerformanceStats {
-    double total_return{0.0};
-    double annualized_volatility{0.0};
-    double sharpe_ratio{0.0};
-    double max_drawdown{0.0};
-    double win_rate{0.0};
-    double avg_win{0.0};
-    double avg_loss{0.0};
-};
-
 class RiskMetrics {
 public:
     static std::vector<double> compute_returns(const std::vector<double>& equity_curve);

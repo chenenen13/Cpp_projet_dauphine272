@@ -60,7 +60,6 @@ void Portfolio::on_trade(const Trade& trade) {
     }
 
     pnl_increments_.push_back(realized_pnl_ - realized_before);
-    
 }
 
 int Portfolio::position() const {

@@ -1,7 +1,11 @@
 #include "MarketDataFeed.hpp"
 #include "Types.hpp"
 
+#include <algorithm>
+#include <cctype>
+#include <exception>
 #include <sstream>
+#include <stdexcept>
 #include <vector>
 
 namespace {
@@ -20,6 +24,58 @@ std::vector<std::string> split_csv_line(const std::string& line) {
 
     return out;
 }
+
+std::string uppercase(std::string value) {
+    std::transform(value.begin(), value.end(), value.begin(), [](unsigned char c) {
+        return static_cast<char>(std::toupper(c));
+    });
+    return value;
+}
+
+void validate_header(const std::string& header) {
+    const auto fields = split_csv_line(header);
+    const std::vector<std::string> expected = {
+        "timestamp", "event_type", "order_id", "side", "price", "quantity"
+    };
+
+    if (fields != expected) {
+        throw std::runtime_error(
+            "Invalid CSV header: expected timestamp,event_type,order_id,side,price,quantity"
+        );
+    }
+}
+
+std::runtime_error parse_error(std::size_t line_number,
+                               const std::string& field_name,
+                               const std::string& raw) {
+    return std::runtime_error(
+        "Invalid " + field_name + " at CSV line " + std::to_string(line_number) +
+        ": '" + raw + "'"
+    );
+}
+
+template <typename Parser>
+auto parse_required_number(const std::string& raw,
+                           std::size_t line_number,
+                           const std::string& field_name,
+                           Parser parser) {
+    if (raw.empty()) {
+        throw parse_error(line_number, field_name, raw);
+    }
+
+    try {
+        std::size_t pos = 0;
+        auto value = parser(raw, pos);
+        if (pos != raw.size()) {
+            throw parse_error(line_number, field_name, raw);
+        }
+        return value;
+    } catch (const std::runtime_error&) {
+        throw;
+    } catch (const std::exception&) {
+        throw parse_error(line_number, field_name, raw);
+    }
+}
 }
 
 MarketDataFeed::MarketDataFeed(const std::string& csv_path)
@@ -32,6 +88,7 @@ MarketDataFeed::MarketDataFeed(const std::string& csv_path)
     if (!std::getline(file_, header)) {
         throw std::runtime_error("CSV file is empty: " + csv_path);
     }
+    validate_header(trim(header));
     line_number_ = 1;
 }
 
@@ -64,11 +121,15 @@ FeedEvent MarketDataFeed::parse_line(const std::string& line) const {
         );
     }
 
-    const std::int64_t timestamp = std::stoll(fields[0]);
-    std::string event_type = fields[1];
-    std::transform(event_type.begin(), event_type.end(), event_type.begin(), [](unsigned char c) {
-        return static_cast<char>(std::toupper(c));
-    });
+    const auto timestamp = parse_required_number(
+        fields[0],
+        line_number_,
+        "timestamp",
+        [](const std::string& raw, std::size_t& pos) {
+            return std::stoll(raw, &pos);
+        }
+    );
+    const std::string event_type = uppercase(fields[1]);
 
     if (event_type == "ADD") {
         if (fields[2].empty() || fields[3].empty() || fields[4].empty() || fields[5].empty()) {
@@ -77,10 +138,31 @@ FeedEvent MarketDataFeed::parse_line(const std::string& line) const {
 
         OrderAdd ev;
         ev.timestamp = timestamp;
-        ev.order_id = std::stoull(fields[2]);
+        ev.order_id = parse_required_number(
+            fields[2],
+            line_number_,
+            "order_id",
+            [](const std::string& raw, std::size_t& pos) {
+                return std::stoull(raw, &pos);
+            }
+        );
         ev.side = parse_side(fields[3]);
-        ev.price = std::stod(fields[4]);
-        ev.quantity = std::stoi(fields[5]);
+        ev.price = parse_required_number(
+            fields[4],
+            line_number_,
+            "price",
+            [](const std::string& raw, std::size_t& pos) {
+                return std::stod(raw, &pos);
+            }
+        );
+        ev.quantity = parse_required_number(
+            fields[5],
+            line_number_,
+            "quantity",
+            [](const std::string& raw, std::size_t& pos) {
+                return std::stoi(raw, &pos);
+            }
+        );
 
         if (ev.price <= 0.0 || ev.quantity <= 0) {
             throw std::runtime_error("Invalid ADD values at CSV line " + std::to_string(line_number_));
@@ -96,7 +178,14 @@ FeedEvent MarketDataFeed::parse_line(const std::string& line) const {
 
         OrderRemove ev;
         ev.timestamp = timestamp;
-        ev.order_id = std::stoull(fields[2]);
+        ev.order_id = parse_required_number(
+            fields[2],
+            line_number_,
+            "order_id",
+            [](const std::string& raw, std::size_t& pos) {
+                return std::stoull(raw, &pos);
+            }
+        );
         return ev;
     }
 

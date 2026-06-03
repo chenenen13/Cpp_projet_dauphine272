@@ -17,7 +17,3 @@ void CsvWriter::write_row(const std::vector<std::string>& row) {
     }
     file_ << "\n";
 }
-
-bool CsvWriter::is_open() const {
-    return file_.is_open();
-}

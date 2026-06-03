@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <iostream>
 #include <iomanip>
-#include <limits>
 
 void OrderBook::sort_books() {
     std::sort(bids_.begin(), bids_.end(), [](const RestingOrder& a, const RestingOrder& b) {
@@ -21,15 +20,43 @@ void OrderBook::sort_books() {
     });
 }
 
-bool OrderBook::order_exists(std::uint64_t order_id) const {
-    auto pred = [order_id](const RestingOrder& o) { return o.order_id == order_id; };
-    return std::any_of(bids_.begin(), bids_.end(), pred) || std::any_of(asks_.begin(), asks_.end(), pred);
+void OrderBook::match_crossing_feed_order(RestingOrder& incoming) {
+    auto& opposite_book = (incoming.side == Side::Bid) ? asks_ : bids_;
+    const auto crosses = [&incoming](const RestingOrder& resting) {
+        if (incoming.side == Side::Bid) {
+            return incoming.price >= resting.price;
+        }
+        return incoming.price <= resting.price;
+    };
+
+    double last_exec_price = 0.0;
+    std::int64_t total_exec_qty = 0;
+
+    while (incoming.quantity > 0 && !opposite_book.empty() && crosses(opposite_book.front())) {
+        RestingOrder& resting = opposite_book.front();
+        const int exec_qty = std::min(incoming.quantity, resting.quantity);
+
+        last_exec_price = resting.price;
+        total_exec_qty += exec_qty;
+        incoming.quantity -= exec_qty;
+        resting.quantity -= exec_qty;
+
+        if (resting.quantity == 0) {
+            mark_order_inactive(resting.order_id);
+            opposite_book.erase(opposite_book.begin());
+        }
+    }
+
+    if (total_exec_qty > 0) {
+        set_last_trade(last_exec_price, total_exec_qty);
+    }
 }
 
 void OrderBook::on_add(const OrderAdd& event) {
-    if (order_exists(event.order_id)) {
+    if (seen_order_ids_.count(event.order_id) > 0) {
         throw std::runtime_error("Duplicate order_id in OrderBook: " + std::to_string(event.order_id));
     }
+    seen_order_ids_.insert(event.order_id);
 
     RestingOrder ro;
     ro.order_id = event.order_id;
@@ -38,7 +65,13 @@ void OrderBook::on_add(const OrderAdd& event) {
     ro.price = event.price;
     ro.quantity = event.quantity;
 
-    if (event.side == Side::Bid) {
+    match_crossing_feed_order(ro);
+    if (ro.quantity == 0) {
+        mark_order_inactive(ro.order_id);
+        return;
+    }
+
+    if (ro.side == Side::Bid) {
         bids_.push_back(ro);
     } else {
         asks_.push_back(ro);
@@ -60,8 +93,17 @@ void OrderBook::on_remove(const OrderRemove& event) {
     const bool removed_bid = remove_id(bids_);
     const bool removed_ask = remove_id(asks_);
 
-    if (!removed_bid && !removed_ask) {
-        std::cout << "[ORDERBOOK][WARN] REMOVE ignored for unknown/already filled order_id="
+    if (removed_bid || removed_ask) {
+        mark_order_inactive(event.order_id);
+        return;
+    }
+
+    if (inactive_order_ids_.count(event.order_id) > 0) {
+        return;
+    }
+
+    if (seen_order_ids_.count(event.order_id) == 0) {
+        std::cout << "[ORDERBOOK][WARN] REMOVE ignored for unknown order_id="
                   << event.order_id << "\n";
     }
 }
@@ -142,4 +184,8 @@ std::vector<RestingOrder>& OrderBook::asks_mutable() {
 void OrderBook::set_last_trade(double price, std::int64_t volume) {
     last_trade_price_ = price;
     last_trade_volume_ = volume;
+}
+
+void OrderBook::mark_order_inactive(std::uint64_t order_id) {
+    inactive_order_ids_.insert(order_id);
 }

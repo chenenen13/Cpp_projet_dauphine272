@@ -15,7 +15,6 @@ std::optional<Order> StrategyEngine::maybe_create_order(const MarketData& data, 
     const Signal signal = on_market_data(data);
 
     if (signal == Signal::Hold) {
-        last_signal_ = signal;
         return std::nullopt;
     }
 
@@ -36,7 +35,6 @@ std::optional<Order> StrategyEngine::maybe_create_order(const MarketData& data, 
         order.price = 0.0;
     }
 
-    last_signal_ = signal;
     return order;
 }
 

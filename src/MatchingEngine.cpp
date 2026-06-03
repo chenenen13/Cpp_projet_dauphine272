@@ -88,6 +88,7 @@ std::vector<Trade> MatchingEngine::match(const Order& order) {
             asks[i].quantity -= exec_qty;
 
             if (asks[i].quantity == 0) {
+                book_.mark_order_inactive(asks[i].order_id);
                 asks.erase(asks.begin() + static_cast<long>(i));
             } else {
                 ++i;
@@ -124,6 +125,7 @@ std::vector<Trade> MatchingEngine::match(const Order& order) {
             bids[i].quantity -= exec_qty;
 
             if (bids[i].quantity == 0) {
+                book_.mark_order_inactive(bids[i].order_id);
                 bids.erase(bids.begin() + static_cast<long>(i));
             } else {
                 ++i;

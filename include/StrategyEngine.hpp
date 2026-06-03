@@ -17,5 +17,4 @@ public:
 private:
     std::unique_ptr<Strategy> strategy_;
     std::uint64_t next_order_id_{1000000};
-    Signal last_signal_{Signal::Hold};
 };
