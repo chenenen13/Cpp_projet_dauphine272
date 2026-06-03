@@ -2,7 +2,6 @@
 
 #include "Types.hpp"
 #include <variant>
-#include <optional>
 #include <string>
 #include <cstdint>
 
