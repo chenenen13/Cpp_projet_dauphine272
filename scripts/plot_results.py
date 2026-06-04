@@ -9,6 +9,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
+STEP_DRAWSTYLE = "steps-post"
+
+
 def read_csv(input_dir: Path, name: str) -> pd.DataFrame:
     path = input_dir / name
     if not path.exists():
@@ -27,7 +30,7 @@ def save_plot(output_dir: Path, file_name: str, show: bool) -> None:
 
 def plot_equity_curve(equity: pd.DataFrame, output_dir: Path, show: bool) -> None:
     plt.figure(figsize=(10, 5))
-    plt.plot(equity["timestamp"], equity["equity"])
+    plt.plot(equity["timestamp"], equity["equity"], drawstyle=STEP_DRAWSTYLE)
     plt.title("Equity Curve")
     plt.xlabel("Timestamp")
     plt.ylabel("Equity")
@@ -37,7 +40,7 @@ def plot_equity_curve(equity: pd.DataFrame, output_dir: Path, show: bool) -> Non
 
 def plot_pnl(equity: pd.DataFrame, output_dir: Path, show: bool) -> None:
     plt.figure(figsize=(10, 5))
-    plt.plot(equity["timestamp"], equity["pnl"])
+    plt.plot(equity["timestamp"], equity["pnl"], drawstyle=STEP_DRAWSTYLE)
     plt.title("Cumulative PnL")
     plt.xlabel("Timestamp")
     plt.ylabel("PnL")
@@ -49,10 +52,19 @@ def plot_market_and_trades(market: pd.DataFrame,
                            trades: pd.DataFrame,
                            output_dir: Path,
                            show: bool) -> None:
+    plotted_market = market.copy()
+    price_columns = ["best_bid", "best_ask", "last_price"]
+    plotted_market[price_columns] = plotted_market[price_columns].mask(
+        plotted_market[price_columns] <= 0
+    )
+
     plt.figure(figsize=(10, 5))
-    plt.plot(market["timestamp"], market["best_bid"], label="Best Bid")
-    plt.plot(market["timestamp"], market["best_ask"], label="Best Ask")
-    plt.plot(market["timestamp"], market["last_price"], label="Last Price")
+    plt.plot(plotted_market["timestamp"], plotted_market["best_bid"],
+             drawstyle=STEP_DRAWSTYLE, label="Best Bid")
+    plt.plot(plotted_market["timestamp"], plotted_market["best_ask"],
+             drawstyle=STEP_DRAWSTYLE, label="Best Ask")
+    plt.plot(plotted_market["timestamp"], plotted_market["last_price"],
+             drawstyle=STEP_DRAWSTYLE, label="Last Price")
 
     if not trades.empty:
         plt.scatter(trades["timestamp"], trades["price"], marker="x", label="Trades")
@@ -67,7 +79,7 @@ def plot_market_and_trades(market: pd.DataFrame,
 
 def plot_position(equity: pd.DataFrame, output_dir: Path, show: bool) -> None:
     plt.figure(figsize=(10, 5))
-    plt.plot(equity["timestamp"], equity["position"])
+    plt.plot(equity["timestamp"], equity["position"], drawstyle=STEP_DRAWSTYLE)
     plt.title("Position Over Time")
     plt.xlabel("Timestamp")
     plt.ylabel("Position")
