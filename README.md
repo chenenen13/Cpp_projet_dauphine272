@@ -63,7 +63,7 @@ Simulation avec fichier CSV et strategie explicites :
 ./build/trading_sim data/test_events.csv ma_cross
 ```
 
-Les fichiers generes sont dans `output/`. Ce dossier est ignore par Git car ces fichiers sont regenerables :
+Les fichiers generes sont dans `output/`. Ils sont versionnes dans ce depot a titre d'exemple de sortie et sont regeneres a chaque execution :
 
 - `market_data.csv` : snapshots de marche.
 - `trades.csv` : trades executes par la strategie.
@@ -222,8 +222,7 @@ cmake --build build
 │   └── mean_reversion_events.csv
 ├── results/
 │   ├── strategy_comparison.csv
-│   ├── momentum_risk_report.csv
-│   └── README.md
+│   └── momentum_risk_report.csv
 ├── include/
 │   ├── Events.hpp
 │   ├── MarketDataFeed.hpp
